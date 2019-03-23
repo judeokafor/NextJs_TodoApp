@@ -11,9 +11,9 @@ export class about extends Component {
           <h3>
               Welcome to my lovely todo app created using Next Js and react
           </h3>
-          <h5>
+          <h4>
             Quite Brief, i know right.
-          </h5>
+          </h4>
         </div>
       </Layout>
       </div>
