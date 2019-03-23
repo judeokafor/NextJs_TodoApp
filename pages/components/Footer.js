@@ -4,8 +4,8 @@ export class Footer extends Component {
   render() {
     return (
       <div>
-        <footer className = "bg-dark">
-            <h5 className="text-center">Copyright <i className="fa fa-copyright" aria-hidden="true"></i> Okafor Jude </h5>
+        <footer className = "footer bg-primary">
+            <h5 className="text-center text-light">Copyright <i className="fa fa-copyright" aria-hidden="true"></i> Okafor Jude </h5>
         </footer>
       </div>
     )
