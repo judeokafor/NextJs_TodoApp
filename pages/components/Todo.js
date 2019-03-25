@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TodoItem from "./TodoItem";
 import AddTodo from "./AddTodo";
-import uuid from "uuid"
+import uuid from "uuid";
 
 export class Todo extends Component {
   state = {
@@ -39,7 +39,7 @@ export class Todo extends Component {
     ]
   };
   // Toogle todo
-  markComplete = (id) => {
+  markComplete = id => {
     this.setState({
       todos: this.state.todos.map(todo => {
         if (todo.id == id) {
@@ -50,36 +50,33 @@ export class Todo extends Component {
     });
   };
   // delete todo from Ui
-  delTodo = (id) => {
+  delTodo = id => {
     this.setState({
       todos: this.state.todos.filter(todo => {
         return todo.id !== id;
-        }) 
+      })
     });
   };
-  addTodo = (title) => {
+  addTodo = title => {
     const newTodo = {
       id: uuid.v4(),
       title: title,
       completed: false
-    }
-    this.setState({todos: [...this.state.todos, newTodo]});
+    };
+    this.setState({ todos: [...this.state.todos, newTodo] });
   };
   render() {
-    
-    return ([
-      <AddTodo addTodo = {this.addTodo} />,
-        this.state.todos.map(todo => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            markComplete={this.markComplete}
-            delTodo={this.delTodo}
-          />
-        )),
-      
-    ])
-    
+    return [
+      <AddTodo addTodo={this.addTodo} />,
+      this.state.todos.map(todo => (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          markComplete={this.markComplete}
+          delTodo={this.delTodo}
+        />
+      ))
+    ];
   }
 }
 
