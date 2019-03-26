@@ -2,30 +2,35 @@ import React, { Component } from "react";
 import Layout from "./components/Layout";
 import Todo from "./components/Todo";
 import Header from "./components/Header";
+import fetch from "isomorphic-unfetch";
 
-export class index extends Component {
-  render() {
-    return (
+const Index = props => (
+  <div>
+    <Layout>
       <div>
-        <Layout>
-          <div>
-            <Header />
-            <p className="lead" style={paragraph}>
-              Add your chores, tick if its completed and delete if you are
-              finished
-            </p>
-            <div className="mb-4">
-              <Todo />
-            </div>
-          </div>
-        </Layout>
+        <Header />
+        <p className="lead" style={paragraph}>
+          Add your chores, tick if its completed and delete if you are finished
+        </p>
+        <div className="mb-4">
+          <Todo props = {props}/>
+        </div>
       </div>
-    );
-    const paragraph = {
-      fontSize: "14px",
-      padding: "5px"
-    };
-  }
-}
+    </Layout>
+  </div>
+);
+Index.getInitialProps = async function() {
+  const res = await fetch("http://localhost:3500/todo");
+  const data = await res.json();
 
-export default index;
+  // console.log('my todos', data);
+  return {
+    todos: data
+  };
+};
+const paragraph = {
+  fontSize: "14px",
+  padding: "5px",
+  textAlign: 'center',
+};
+export default Index;
