@@ -2,42 +2,47 @@ import React, { Component } from "react";
 import TodoItem from "./TodoItem";
 import AddTodo from "./AddTodo";
 import uuid from "uuid";
+import PropTypes from "prop-types";
+import fetch from "isomorphic-unfetch";
+import swal from "sweetalert2";
 
 export class Todo extends Component {
   state = {
-    todos: [
-      {
-        id: uuid.v4(),
-        title: "Learn React hooks",
-        completed: false,
-        created: Date.now()
-      },
-      {
-        id: uuid.v4(),
-        title: "Learn Progressive Web App",
-        completed: false,
-        created: Date.now()
-      },
-      {
-        id: uuid.v4(),
-        title: "Learn React Router",
-        completed: true,
-        created: Date.now()
-      },
-      {
-        id: uuid.v4(),
-        title: "Read documentation of next js",
-        completed: true,
-        created: Date.now()
-      },
-      {
-        id: uuid.v4(),
-        title: "Read documentation of next js",
-        completed: true,
-        created: Date.now()
-      }
-    ]
-  };
+    todos: this.props.props.todos,
+    // todos: [
+    //   {
+    //     id: uuid.v4(),
+    //     title: "Learn React hooks",
+    //     completed: false,
+    //     created: Date.now()
+    //   },
+    //   {
+    //     id: uuid.v4(),
+    //     title: "Learn Progressive Web App",
+    //     completed: false,
+    //     created: Date.now()
+    //   },
+    //   {
+    //     id: uuid.v4(),
+    //     title: "Learn React Router",
+    //     completed: true,
+    //     created: Date.now()
+    //   },
+    //   {
+    //     id: uuid.v4(),
+    //     title: "Read documentation of next js",
+    //     completed: true,
+    //     created: Date.now()
+    //   },
+    //   {
+    //     id: uuid.v4(),
+    //     title: "Read documentation of next js",
+    //     completed: true,
+    //     created: Date.now()
+    //   }
+    // ]
+  }
+
   // Toogle todo
   markComplete = id => {
     this.setState({
@@ -64,8 +69,34 @@ export class Todo extends Component {
       completed: false
     };
     this.setState({ todos: [...this.state.todos, newTodo] });
+    swal.fire({
+      position: 'top-end',
+      type: 'success',
+      title: '<h4>Todo Added</h4>',
+      showConfirmButton: false,
+      width: '300px',
+      height: '150px',
+      timer: 2000
+    })
+    async () => {
+      const res = await fetch("http://localhost:3500/todo", {
+        method : 'POST',
+        body: newTodo,
+        headers: new Headers ({
+          'content-type' : 'application/x-wwww-form-urlencoded; charset=utf-8',
+          'Accept': 'application/json'
+        })
+      });
+      const data = await res.json();
+    
+      console.log('my added todos', data);
+      // return {
+      //   todos: data
+      // };
+    };
   };
   render() {
+    // console.log('inside todo component', this.props.props.todos);
     return [
       <AddTodo addTodo={this.addTodo} />,
       this.state.todos.map(todo => (
@@ -79,5 +110,8 @@ export class Todo extends Component {
     ];
   }
 }
-
+// Prop-Types
+Todo.propTypes = {
+  todos: PropTypes.object.isRequired
+};
 export default Todo;
