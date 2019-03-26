@@ -3,6 +3,8 @@ import TodoItem from "./TodoItem";
 import AddTodo from "./AddTodo";
 import uuid from "uuid";
 import PropTypes from "prop-types";
+import fetch from "isomorphic-unfetch";
+import swal from "sweetalert2";
 
 export class Todo extends Component {
   state = {
@@ -67,17 +69,31 @@ export class Todo extends Component {
       completed: false
     };
     this.setState({ todos: [...this.state.todos, newTodo] });
-    // async () => {
-    //   const res = await fetch("http://localhost:3500/todo", newTodo, {
-    //     method : 'POST',
-    //   });
-    //   const data = await res.json();
+    swal.fire({
+      position: 'top-end',
+      type: 'success',
+      title: '<h4>Todo Added</h4>',
+      showConfirmButton: false,
+      width: '300px',
+      height: '150px',
+      timer: 2000
+    })
+    async () => {
+      const res = await fetch("http://localhost:3500/todo", {
+        method : 'POST',
+        body: newTodo,
+        headers: new Headers ({
+          'content-type' : 'application/x-wwww-form-urlencoded; charset=utf-8',
+          'Accept': 'application/json'
+        })
+      });
+      const data = await res.json();
     
-    //   // console.log('my todos', data);
-    //   return {
-    //     todos: data
-    //   };
-    // };
+      console.log('my added todos', data);
+      // return {
+      //   todos: data
+      // };
+    };
   };
   render() {
     // console.log('inside todo component', this.props.props.todos);

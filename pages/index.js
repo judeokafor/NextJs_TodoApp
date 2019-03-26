@@ -29,8 +29,8 @@ Index.getInitialProps = async function() {
   };
 };
 const paragraph = {
-  fontSize: "14px",
-  padding: "5px",
+  fontSize: "16px",
+  padding: "8px",
   textAlign: 'center',
 };
 export default Index;

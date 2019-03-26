@@ -23,8 +23,9 @@ app
       const todoData = req.body;
       const todo = new Todo(todoData.id, todoData.title, todoData.completed);
       todo.id = uuid.v4();
+      todo.completed = false;
       todoStore.push(todo);
-      return res.status(201).send("Todo Added");
+      return res.status(201).json(todoStore);
     });
 
     server.get("/todo", (req, res) => {

@@ -15,13 +15,13 @@ module.exports = [
   {
     //   id: 3,
     id:uuid.v4(),
-    title: "Learn React Router",
+    title: "Learn React Router and Next js links",
     completed: true
   },
   {
     //   id: 4,
     id:uuid.v4(),
-    title: "Read documentation of next js",
+    title: "Read documentation of React js",
     completed: true
   },
   {
@@ -29,5 +29,11 @@ module.exports = [
     id:uuid.v4(),
     title: "Read documentation of next js",
     completed: true
+  },
+  {
+    //   id: 5,
+    id:uuid.v4(),
+    title: "Learn Redux and its implementation",
+    completed: false
   }
 ];
