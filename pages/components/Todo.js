@@ -61,6 +61,15 @@ export class Todo extends Component {
         return todo.id !== id;
       })
     });
+    swal.fire({
+      position: 'top-end',
+      type: 'success',
+      title: '<h4>Todo Deleted</h4>',
+      showConfirmButton: false,
+      width: '300px',
+      height: '150px',
+      timer: 2000
+    })
   };
   addTodo = title => {
     const newTodo = {
