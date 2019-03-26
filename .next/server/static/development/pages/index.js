@@ -2034,6 +2034,16 @@ function (_Component) {
           return todo.id !== id;
         })
       });
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_16___default.a.fire({
+        position: 'top-end',
+        type: 'success',
+        title: '<h4>Todo Deleted</h4>',
+        showConfirmButton: false,
+        width: '300px',
+        height: '150px',
+        timer: 2000
+      });
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_9__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7__["default"])(_this), "addTodo", function (title) {
